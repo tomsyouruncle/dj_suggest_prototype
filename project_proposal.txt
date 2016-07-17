@@ -1,0 +1,40 @@
+DJ set assist with Spotify
+--------------------------
+
+The creation of a dance music DJ set is a complex art that is currently ill-served by the music technology industry. And yet, DJing is an increasingly dominant aspect of music culture and creating a good DJ set is in large part a data science problem. 
+
+DJs will typically focus a section of a set on a particular style of music, a narrow range of tempos, or a particular timbre, mood or energy. All of these features of music tracks are, to a large extent, accessible to a data-based approach.
+
+For many DJs, building a quality set involves assembling a combination of unusual, hard-to-find, "crate-digging" tracks that never-the-less have some (but not all) features in common. The size of the potential source pool of tracks is vast, especially for the digital DJ who is limited not by the weight of the records she can carry in her bag but rather the MP3s she can store on her laptop, or increasingly the tracks she can access via her streaming service. As such, the problem becomes not one of knowing and having access to the right tracks, but rather being able to successfully navigate a vast library of music. 
+
+I propose, as a Data Incubator project, the development of the data analysis and machine learning elements of such an app, utilizing track attributes data from Spotify. These attributes, available via Spotify's API, include tempo, key, 'danceability', 'acousticness', energy, and more. Moreover, the majority of Spotify's 4 million tracks are tagged with this feature information.
+
+This might include one or more of the following: 
+  - generating playlist suggestions based on user input track features
+  - using the features of already chosen tracks to suggest further tracks
+  - building binary classifier models to dynamically accept or reject tracks from a source pool based on which previous tracks the user has chosen. 
+  - building in the concept of a 'direction' in music feature space, allowing a user to find tracks that are, for example, slightly higher tempo or happier than previous tracks.
+
+For the creation of these tool:
+  - a variety of modeling approaches could be experimented with including simple logistic regression, deep learning and random forest classifiers.
+  - the use of Bayesian inference techniques for model training is of interest
+  - the TensorFlow Python library is proposed for its ease of use and versatility 
+  - existing DJ playlists in Spotify can be used as ground truth data to assess model performance
+ 
+As a brief demonstration both of the feasibility of using the Spotify API to retrieve track features and of the power of these attributes to predict musical genre, some initial exploratory data analysis has been conducted in Python with data mined from Spotify via its public API.
+
+In particular, five distinct playlists, each containing tracks from a different genre of music (dance, hip hop, jazz, classical, indie-rock) have been selected and the track attributes of each track in each playlist have been collected. This dataset includes 350 tracks, and 20 fields of track data including 14 music features.
+
+The first chart shows a pairplot of six of these features, with each point representing one track color-coded by playlist. Looking first at the histograms of track distribution across individual features, various aspects of the data are highlighted:
+  - 'speechiness' does an excellent job of differentiating hip-hop (blue) from other musical styles
+  - the tempo of dance music tracks (green) sits in a much narrower band than other styles.
+  - 'acousticness' shows a clear binary split between (classical + jazz) vs (dance, hiphop and indie).
+
+Examining the pairplots for interesting pairwise correlation effects we see:
+  - 'danceability' vs valance provides some indication of clustering of tracks according to genre along a bottom left to top right diagonal from classical, through jazz, indie and dance, to hiphop.
+  - likewise 'danceability' vs energy shows two distinct energy groups (classical, jazz) which are then each partitioned into distinct genres by their danceability.
+
+The second chart takes a playlist of an actual DJ set (in the 'tech-house' genre) and compares its tempo distribution to that of the other five playlists via a violinplot. Evidently the DJ set (dataset 5, far right) has a much tighter range of tempos in its tracks.
+
+Together these initial plots demonstrate that track features are accessible and provide useful predictive insight into musical genre as well as demonstrating the tendency for DJ's to choose tracks that have a high degree of feature-similarity within a playlist.
+
